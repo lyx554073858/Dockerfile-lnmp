@@ -16,6 +16,6 @@ try{
     die("fail....".$con->connect_error);
     }else{
 
-      echo "ok....";
+      echo "Mysql connection succeeded";
    }
 

@@ -12,5 +12,5 @@
 
 $redis = new Redis();
 $redis->connect('redis',6379);
-$redis->set('test','hello world!');
+$redis->set('test','Redis connection succeeded');
 echo $redis->get('test');
