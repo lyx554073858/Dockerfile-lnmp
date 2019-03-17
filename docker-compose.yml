@@ -1,0 +1,82 @@
+version: '3'
+# 定义四个服务nginx,php,mysql,redis
+services:
+  nginx:
+    # 依赖php服务，意味着在启动nginx之前先启动php
+    depends_on:
+      - php
+      # nginx镜像的路径
+    build: ./nginx
+    #image: yahuiwong/lnmp:nginx1.13.0
+        # 这样使nginx容器把网站文件和目录存放到主机目录中，持久化和方便管理
+    volumes:
+      - ./nginx/www:/usr/share/nginx/html
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl/:/etc/nginx/ssl/
+      - ./nginx/log/error.log:/var/log/nginx/error.log
+        # nginx意外退出时自动重启
+    restart: always
+
+        # 映射80和443端口
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - frontend
+
+        # 容器名称
+    container_name: nginx
+
+  php:
+    depends_on:
+      - mysql
+      - redis
+    build: ./php
+    #image: yahuiwong/lnmp:php7.1.5
+    ports:
+      - "9000"
+    networks:
+      - frontend
+      - backend      
+    volumes:
+      - ./php/php-fpm.conf:/usr/local/php/etc/php-fpm.conf
+      - ./php/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
+      - ./php/php.ini:/usr/local/php/etc/php.ini
+      - ./php/log/php-fpm.log:/usr/local/php/var/log/php-fpm.log
+      - ./nginx/www:/usr/share/nginx/html
+    restart: always
+    container_name: php
+
+  mysql:
+    image: docker.io/mysql:5.7.25
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/my.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    networks:
+      - backend
+    restart: always
+    container_name: mysql
+
+  # REDIS
+  redis:
+    build: ./redis
+    #image: yahuiwong/lnmp:redis3.2.9
+    ports:
+      - "6379:6379"
+    networks:
+      - backend      
+    volumes:
+      - ./redis/redis.conf:/usr/local/redis/redis.conf
+      - ./redis/data:/usr/local/redis/data
+      - ./redis/redis.log:/usr/local/redis/redis.log
+    restart: always
+    container_name: redis
+
+networks:
+  frontend:
+  backend:
