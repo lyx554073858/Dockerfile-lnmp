@@ -6,8 +6,9 @@ services:
     depends_on:
       - php
       # nginx镜像的路径
-    build: ./nginx
+    #build: ./nginx
     #image: yahuiwong/lnmp:nginx1.13.0
+    image: lyx554073858/lnmp:nginx1.14.0
         # 这样使nginx容器把网站文件和目录存放到主机目录中，持久化和方便管理
     volumes:
       - ./nginx/www:/usr/share/nginx/html
@@ -32,8 +33,9 @@ services:
     depends_on:
       - mysql
       - redis
-    build: ./php
+    #build: ./php
     #image: yahuiwong/lnmp:php7.1.5
+    image: lyx554073858/lnmp:php7.2.16
     ports:
       - "9000"
     networks:
@@ -49,9 +51,11 @@ services:
     container_name: php
 
   mysql:
-    image: docker.io/mysql:5.7.25
+    #build: ./mysql
+    #image: docker.io/mysql:5.7.25
+    image: lyx554073858/lnmp:mysql5.7.25
     ports:
-      - "127.0.0.1:3306:3306"
+      - "3306:3306"
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/my.cnf:/etc/my.cnf
