@@ -37,7 +37,7 @@ services:
     #image: yahuiwong/lnmp:php7.1.5
     image: lyx554073858/lnmp:php7.2.16
     ports:
-      - "9000"
+      - "9000:9000"
     networks:
       - frontend
       - backend      
