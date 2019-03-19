@@ -9,12 +9,20 @@ MAINTAINER lyx <lyx@qq.com>
 ENV PHP_VERSION 7.2.16
 #ENV REDIS_VERSION 3.1.2
 ENV REDIS_VERSION 4.2.0
+
+#set timezome
+ENV TZ=Asia/Shanghai
+
+
 # 安装依赖
 RUN set -x \
   && yum update -y \
   && yum install epel-release -y \
   && yum install -y wget git gcc gcc-c++ make automake autoconf perl file tar re2c libjpeg libpng libjpeg-devel libpng-devel libjpeg-turbo freetype freetype-devel \
         libcurl-devel libxml2-devel libjpeg-turbo-devel libXpm-devel libXpm libicu-devel libmcrypt libmcrypt-devel libxslt-devel libxslt openssl openssl-devel bzip2-devel \
+  
+  #设置容器的时区
+  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone\
   
   # 建立目录
   
