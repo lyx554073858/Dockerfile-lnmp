@@ -7,6 +7,9 @@ MAINTAINER lyx <lyx@qq.com>
 # 设置 Redis 版本
 ENV REDIS_VERSION 4.0.13
 
+#set timezome
+ENV TZ=Asia/Shanghai
+
 # 下载并编译
 RUN set -x \
   && yum update -y \
@@ -23,6 +26,9 @@ RUN set -x \
   && make \
   && make -C /usr/local/redis/src install \
   && mkdir /usr/local/redis/data \
+  
+  #设置容器的时区
+  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 
   && yum clean all
 
