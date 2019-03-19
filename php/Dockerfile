@@ -7,12 +7,12 @@ MAINTAINER lyx <lyx@qq.com>
 # 设置 PHP 和redis版本
 #ENV PHP_VERSION 7.1.5
 ENV PHP_VERSION 7.2.16
+
 #ENV REDIS_VERSION 3.1.2
 ENV REDIS_VERSION 4.2.0
 
 #set timezome
 ENV TZ=Asia/Shanghai
-
 
 # 安装依赖
 RUN set -x \
