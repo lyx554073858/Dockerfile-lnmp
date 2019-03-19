@@ -6,12 +6,17 @@ MAINTAINER lyx <lyx@qq.com>
 
 # 设置 openssl 和 nginx 版本
 ENV NGINX_VERSION 1.14.0
+#set timezome
+ENV TZ=Asia/Shanghai
 
 # 安装依赖
 RUN set -x \
   && yum update -y \
   && yum install -y wget gcc gcc-c++ make automake autoconf libtool libxml2-devel libxslt-devel perl-devel perl-ExtUtils-Embed pcre-devel perl file tar bzip2-devel bzip2 openssl openssl-devel zlib zlib-devel \
-
+  
+  #设置容器的时区
+  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone\
+  
   # 创建下载目录
   && mkdir ~/download \
   
@@ -65,7 +70,11 @@ RUN set -x \
   && make \
   && make install \
   && rm -rf ~/download \
-  && yum clean all
+  && yum clean all \
+  
+  #设置centos7与容器时间一致
+  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 
 # 若要使用https，请将以下三个注释去掉,并在ssl文件夹中添加你自己申请的两个证书文件
 #  && mkdir -p /etc/nginx/cert
