@@ -11,7 +11,7 @@ ENV TZ=Asia/Shanghai
 
 # 安装依赖
 RUN set -x \
-  && yum update -y \
+#  && yum update -y \
   && yum install -y wget gcc gcc-c++ make automake autoconf libtool libxml2-devel libxslt-devel perl-devel perl-ExtUtils-Embed pcre-devel perl file tar bzip2-devel bzip2 openssl openssl-devel zlib zlib-devel \
   
   #设置容器的时区
