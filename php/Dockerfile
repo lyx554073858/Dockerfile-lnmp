@@ -1,5 +1,5 @@
 # 拉取 CentOS7
-FROM docker.io/centos:centos7.4.1708
+FROM docker.io/centos:7.4.1708
 
 # 维护者
 MAINTAINER lyx <lyx@qq.com>
