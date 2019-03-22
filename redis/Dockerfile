@@ -12,7 +12,7 @@ ENV TZ=Asia/Shanghai
 
 # 下载并编译
 RUN set -x \
-  && yum update -y \
+#  && yum update -y \
   && yum install -y wget gcc gcc-c++ make perl tar \
   && cd /opt \
   && wget http://download.redis.io/releases/redis-$REDIS_VERSION.tar.gz \
