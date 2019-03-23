@@ -11,6 +11,7 @@ COPY config/php.ini /usr/local/etc/php
 #    && make \
 #    && make install \
 
+
 ENV PHPREDIS_VERSION 4.2.0
 
 RUN cd ~ \
