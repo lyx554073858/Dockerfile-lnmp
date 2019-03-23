@@ -1,1 +1,1 @@
-FROM docker.io/mysql:5.7.25
+FROM daocloud.io/library/mysql:5.7.24
