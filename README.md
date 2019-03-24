@@ -181,7 +181,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 	   chmod 777 ./redis/data
 	```
 * MYSQL连接失败问题
-在v2版本中是最新的MySQL8,而该版本的密码认证方式为Caching_sha2_password,而低版本的php和mysql可视化工具可能不支持,可通过phpinfo里的mysqlnd的Loaded plugins查看是否支持该认证方式,否则需要修改为原来的认证方式mysql_native_password:
+在v2版本中是最新的MySQL8(目前已修改成MySQL5.7),而在MySQL8版本的密码认证方式为Caching_sha2_password,而低版本的php和mysql可视化工具可能不支持,可通过phpinfo里的mysqlnd的Loaded plugins查看是否支持该认证方式,否则需要修改为原来的认证方式mysql_native_password:
 select user,host,plugin,authentication_string from mysql.user;
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 FLUSH PRIVILEGES;
