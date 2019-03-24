@@ -21,6 +21,8 @@ services:
   php:
     #build: ./php
     image: lyx554073858/lnmp:v2-php7.2-fpm-alpine
+    ports:
+      - "9000:9000"
     volumes:
       - ./nginx/www:/var/www/html
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
