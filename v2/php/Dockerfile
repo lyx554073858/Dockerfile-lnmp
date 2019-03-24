@@ -1,4 +1,6 @@
-FROM docker.io/php:7.2-fpm-alpine
+FROM daocloud.io/library/php:7.2-fpm-alpine
+
+#FROM docker.io/php:7.2-fpm-alpine
 
 COPY config/php.ini /usr/local/etc/php
 
