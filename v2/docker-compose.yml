@@ -1,7 +1,8 @@
 version: '3'
 services:
   nginx:
-    build: ./nginx
+    #build: ./nginx
+    image: lyx554073858/lnmp:v2-nginx1.14.2-alpine
     depends_on:
       - php
     ports: 
@@ -18,7 +19,8 @@ services:
     container_name: nginx
 
   php:
-    build: ./php
+    #build: ./php
+    image: lyx554073858/lnmp:v2-php7.2-fpm-alpine
     volumes:
       - ./nginx/www:/var/www/html
       - ./php/config/php.ini:/usr/local/etc/php/php.ini
@@ -29,7 +31,8 @@ services:
     container_name: php
 
   mysql:
-    build: ./mysql
+    #build: ./mysql
+    image: lyx554073858/lnmp:v2-mysql5.7.24
     ports:
       - "3306:3306"
     volumes:
@@ -43,7 +46,8 @@ services:
     container_name: mysql
 
   redis:
-    build: ./redis
+    #build: ./redis
+    image: lyx554073858/lnmp:v2-redis4.0.11-alpine
     ports:
       - "6379:6379"
     volumes:
