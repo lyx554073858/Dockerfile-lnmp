@@ -30,8 +30,8 @@ RUN set -x \
   && cd ~/download \
 
   # 编译 PHP
-#  && wget http://cn2.php.net/distributions/php-$PHP_VERSION.tar.gz \
-  && wget https://php.net/get/php-7.2.16.tar.gz/from/a/mirror/php-$PHP_VERSION.tar.gz \
+  && wget http://cn2.php.net/distributions/php-$PHP_VERSION.tar.gz \
+#  && wget https://php.net/get/php-7.2.16.tar.gz/from/a/mirror/php-$PHP_VERSION.tar.gz \
   && tar -zxf php-$PHP_VERSION.tar.gz \
   && cd php-$PHP_VERSION \
   && groupadd -r nginx \
@@ -102,20 +102,20 @@ RUN set -x \
   && php composer-setup.php --install-dir=/usr/local/sbin --filename=composer \
   && php -r "unlink('composer-setup.php');" \
   
-  #安装 Swoole
-  && yum install -y  libstdc++ libpng-dev \
-  && cd ~/download \
-  && wget https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
-  && tar -zxvf v4.2.12.tar.gz \
-  && mkdir -p /usr/src/php/ext \
-  && mv swoole-src-4.2.12 /usr/src/php/ext/swoole \
-#  && cd /usr/src/php/ext/swoole \
-#  && phpize \
-#  && /usr/local/php/bin/phpize \
-#  && ./configure \
-#  && make \
-#  && make install \
-  && docker-php-ext-install swoole \
+#  #安装 Swoole
+#  && yum install -y  libstdc++ libpng-dev \
+#  && cd ~/download \
+#  && wget https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
+#  && tar -zxvf v4.2.12.tar.gz \
+#  && mkdir -p /usr/src/php/ext \
+#  && mv swoole-src-4.2.12 /usr/src/php/ext/swoole \
+##  && cd /usr/src/php/ext/swoole \
+##  && phpize \
+##  && /usr/local/php/bin/phpize \
+##  && ./configure \
+##  && make \
+##  && make install \
+#  && docker-php-ext-install swoole \
   
   # 删除安装文件
   && rm -rf ~/download \
