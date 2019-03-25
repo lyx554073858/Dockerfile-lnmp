@@ -102,20 +102,20 @@ RUN set -x \
   && php composer-setup.php --install-dir=/usr/local/sbin --filename=composer \
   && php -r "unlink('composer-setup.php');" \
   
-#  #安装 Swoole
-#  && yum install -y  libstdc++ libpng-dev \
-#  && cd ~/download \
-#  && wget https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
-#  && tar -zxvf v4.2.12.tar.gz \
-#  && mkdir -p /usr/src/php/ext \
-#  && mv swoole-src-4.2.12 /usr/src/php/ext/swoole \
+  #安装 Swoole
+  && yum install -y  libstdc++ libpng-dev \
+  && cd ~/download \
+  && wget https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
+  && tar -zxvf v4.2.12.tar.gz \
+  && mkdir -p /usr/src/php/ext \
+  && mv swoole-src-4.2.12 /usr/src/php/ext/swoole \
 ##  && cd /usr/src/php/ext/swoole \
 ##  && phpize \
 ##  && /usr/local/php/bin/phpize \
 ##  && ./configure \
 ##  && make \
 ##  && make install \
-#  && docker-php-ext-install swoole \
+  && docker-php-ext-install swoole \
   
   # 删除安装文件
   && rm -rf ~/download \
