@@ -103,11 +103,15 @@ RUN set -x \
   
   #安装 Swoole
   && yum install -y  libstdc++ libpng-dev \
-  && cd ~ \
+  && cd ~/download \
   && wget https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
   && tar -zxvf v4.2.12.tar.gz \
   && mkdir -p /usr/src/php/ext \
   && mv swoole-src-4.2.12 /usr/src/php/ext/swoole \
+  && cd /usr/src/php/ext/swoole
+  && ./configure \
+  && make \
+  && make install \
   && docker-php-ext-install swoole \
   
   # 删除安装文件
