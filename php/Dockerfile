@@ -121,7 +121,7 @@ RUN set -x \
   &&./configure --with-php-config=/usr/local/php/bin/php-config \
   && make \
   && make install \
-  && docker-php-ext-install swoole \
+  # && docker-php-ext-install swoole \
   
   # 删除安装文件
   && rm -rf ~/download \
