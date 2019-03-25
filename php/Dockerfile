@@ -117,6 +117,7 @@ RUN set -x \
 ##  && make install \
 #  && docker-php-ext-install swoole \
   
+  
   # 删除安装文件
   && rm -rf ~/download \
   && yum clean all
