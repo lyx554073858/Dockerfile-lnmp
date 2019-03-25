@@ -108,9 +108,9 @@ RUN set -x \
   && tar -zxvf v4.2.12.tar.gz \
   && mkdir -p /usr/src/php/ext \
   && mv swoole-src-4.2.12 /usr/src/php/ext/swoole \
-#  && cd /usr/src/php/ext/swoole
-#  && phpize
-#  && /usr/local/php/bin/phpize
+#  && cd /usr/src/php/ext/swoole \
+#  && phpize \
+#  && /usr/local/php/bin/phpize \
 #  && ./configure \
 #  && make \
 #  && make install \
