@@ -32,9 +32,12 @@ RUN set -x \
   && cd ~/download \
 
   # 编译 PHP
+  # 国内PHP连接地址
   # && wget http://cn2.php.net/distributions/php-$PHP_VERSION.tar.gz \
-  # && wget https://www.php.net/distributions/php-$PHP_VERSION.tar.gz \
+  
+  # 国外PHP连接地址
   && wget http://us3.php.net/distributions/php-$PHP_VERSION.tar.gz \
+  
   && tar -zxf php-$PHP_VERSION.tar.gz \
   && cd php-$PHP_VERSION \
   && groupadd -r nginx \
