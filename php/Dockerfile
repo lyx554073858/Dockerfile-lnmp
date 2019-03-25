@@ -4,12 +4,14 @@ FROM docker.io/centos:7.4.1708
 # 维护者
 MAINTAINER lyx <lyx@qq.com>
 
-# 设置 PHP 和redis版本
+# 设置 PHP/redis/swoole版本
 #ENV PHP_VERSION 7.1.5
 ENV PHP_VERSION 7.2.16
 
 #ENV REDIS_VERSION 3.1.2
 ENV REDIS_VERSION 4.2.0
+
+ENV SWOOLE_VERSION v4.2.12
 
 #set timezome
 ENV TZ=Asia/Shanghai
@@ -102,19 +104,23 @@ RUN set -x \
   && php composer-setup.php --install-dir=/usr/local/sbin --filename=composer \
   && php -r "unlink('composer-setup.php');" \
   
-  #安装 Swoole
+  # 安装 Swoole
   && yum install -y  libstdc++ libpng-dev \
   && cd ~/download \
-  && wget https://github.com/swoole/swoole-src/archive/v4.2.12.tar.gz \
-  && tar -zxvf v4.2.12.tar.gz \
+  && wget https://github.com/swoole/swoole-src/archive/$SWOOLE_VERSION.tar.gz \
+  && tar -zxvf $SWOOLE_VERSION.tar.gz \
   && mkdir -p /usr/src/php/ext \
+  
+  # 当swoole版本不一致时，需要进行修改)
   && mv swoole-src-4.2.12 /usr/src/php/ext/swoole \
-##  && cd /usr/src/php/ext/swoole \
-##  && phpize \
-##  && /usr/local/php/bin/phpize \
-##  && ./configure \
-##  && make \
-##  && make install \
+  && cd /usr/src/php/ext/swoole \
+  
+  # && phpize \
+  && /usr/local/php/bin/phpize \  
+  # && ./configure \
+  &&./configure --with-php-config=/usr/local/php/bin/php-config \
+  && make \
+  && make install \
   && docker-php-ext-install swoole \
   
   # 删除安装文件
