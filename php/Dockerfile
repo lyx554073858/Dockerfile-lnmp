@@ -115,7 +115,6 @@ RUN set -x \
   # 当swoole版本不一致时，需要进行修改)
   && mv swoole-src-4.2.12 /usr/src/php/ext/swoole \
   && cd /usr/src/php/ext/swoole \
-  
   # && phpize \
   && /usr/local/php/bin/phpize \  
   # && ./configure \
