@@ -1,8 +1,10 @@
 FROM daocloud.io/library/php:7.2-fpm-alpine
-
 #FROM docker.io/php:7.2-fpm-alpine
 
 COPY config/php.ini /usr/local/etc/php
+
+### set timezome
+ENV TZ=Asia/Shanghai
 
 #RUN apk add autoconf gcc \
 #    && wget https://github.com/phpredis/phpredis/archive/3.1.3.tar.gz \
@@ -34,3 +36,6 @@ RUN cd ~ \
     && docker-php-ext-install pdo_mysql mysqli pcntl gd\
 
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
+    
+    #设置时区
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
