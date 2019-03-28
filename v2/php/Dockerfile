@@ -18,7 +18,8 @@ ENV TZ=Asia/Shanghai
 
 ENV PHPREDIS_VERSION 4.2.0
 
-RUN cd ~ \
+RUN apk add --no-cache tzdata \
+    && cd ~ \
     && wget https://github.com/phpredis/phpredis/archive/4.2.0.tar.gz \
     && tar -zxvf 4.2.0.tar.gz \
     && mkdir -p /usr/src/php/ext \
